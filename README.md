@@ -181,6 +181,15 @@ therefore verifies and controls the added custom-rule diagnostics.
 
 ### Apple Silicon arm64
 
+#### Summary
+
+| Custom rules | Custom diagnostics | Oxlint JS Plugin | ESLint Custom Rule | Speedup | Oxlint delta from 0 rules | ESLint delta from 0 rules |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 0 | 0.432 s | 44.783 s | 103.63x | - | - |
+| 1 | 6,948 | 4.220 s | 47.711 s | 11.31x | +3.788 s | +2.928 s |
+| 3 | 20,844 | 4.650 s | 47.814 s | 10.28x | +4.218 s | +3.031 s |
+| 10 | 69,480 | 6.117 s | 44.093 s | 7.21x | +5.685 s | -0.690 s |
+
 #### No ESLint custom rule vs no Oxlint JS Plugin rule
 
 ```
