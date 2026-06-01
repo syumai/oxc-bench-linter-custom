@@ -164,11 +164,12 @@ Summary
 ### Oxlint JS Plugin vs ESLint Custom Rules
 
 This benchmark explicitly lists non-type-aware core lint rules for ESLint and
-Oxlint, then adds 1, 3, or 10 equivalent custom rules. It does not include
+Oxlint, then adds 0, 1, 3, or 10 equivalent custom rules. It does not include
 `@typescript-eslint/*` rules. `no-unused-vars` is also excluded because ESLint's
 core rule is not compatible with this TypeScript AST workload.
 The custom rule diagnostics are verified before benchmarking:
 
+-   0 custom rules: 0 diagnostics in both ESLint and Oxlint
 -   1 custom rule: 6,948 diagnostics in both ESLint and Oxlint
 -   3 custom rules: 20,844 diagnostics in both ESLint and Oxlint
 -   10 custom rules: 69,480 diagnostics in both ESLint and Oxlint
@@ -179,6 +180,26 @@ diagnostics, and Oxlint reports 1,702 diagnostics. The comparison below
 therefore verifies and controls the added custom-rule diagnostics.
 
 ### Apple Silicon arm64
+
+#### No ESLint custom rule vs no Oxlint JS Plugin rule
+
+```
+Benchmark 1: oxc-js-plugin-0
+  Time (mean ± σ):     432.2 ms ±  49.7 ms    [User: 1553.5 ms, System: 784.0 ms]
+  Range (min … max):   386.1 ms … 544.3 ms    10 runs
+
+  Warning: Ignoring non-zero exit code.
+
+Benchmark 2: eslint-custom-rules-0
+  Time (mean ± σ):     44.783 s ±  0.209 s    [User: 64.544 s, System: 2.572 s]
+  Range (min … max):   44.445 s … 45.070 s    10 runs
+
+  Warning: Ignoring non-zero exit code.
+
+Summary
+  oxc-js-plugin-0 ran
+  103.63 ± 11.92 times faster than eslint-custom-rules-0
+```
 
 #### 1 ESLint custom rule vs 1 Oxlint JS Plugin rule
 

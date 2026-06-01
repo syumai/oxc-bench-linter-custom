@@ -37,7 +37,7 @@ echo "-------------------------------------------"
 
 node ./bench-vscode/verify-custom-rules.mjs
 
-for RULE_COUNT in 1 3 10; do
+for RULE_COUNT in 0 1 3 10; do
   echo ""
   echo "3.${RULE_COUNT}. ${RULE_COUNT} custom rule(s)"
   echo "-------------------------------------------"

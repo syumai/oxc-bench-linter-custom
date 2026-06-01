@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { ESLint } from 'eslint';
 
 const testDir = 'tmp/vscode/src';
-const ruleCounts = [1, 3, 10];
+const ruleCounts = [0, 1, 3, 10];
 
 function run(command, args, env = {}) {
     try {
