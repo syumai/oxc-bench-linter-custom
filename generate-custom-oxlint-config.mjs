@@ -1,5 +1,6 @@
 import { writeFileSync } from 'node:fs';
 import { oxlintStandardRules } from './bench-vscode/custom-benchmark-rules.mjs';
+import { customRuleNames } from './custom-rules-plugin.mjs';
 
 const [outputConfigPath, pluginSpecifier, rawRuleCount] = process.argv.slice(2);
 const ruleCount = Number(rawRuleCount);
@@ -11,8 +12,8 @@ if (!outputConfigPath || !pluginSpecifier || ![0, 1, 3, 10].includes(ruleCount))
 }
 
 const customRules = Object.fromEntries(
-    Array.from({ length: ruleCount }, (_, index) => [
-        `bench/program-${index + 1}`,
+    customRuleNames.slice(0, ruleCount).map((ruleName) => [
+        `bench/${ruleName}`,
         'error',
     ]),
 );

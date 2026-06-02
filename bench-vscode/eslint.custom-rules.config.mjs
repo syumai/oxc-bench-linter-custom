@@ -1,6 +1,6 @@
 import tsParser from '@typescript-eslint/parser';
 import { eslintStandardRules } from './custom-benchmark-rules.mjs';
-import customRulesPlugin from '../custom-rules-plugin.mjs';
+import customRulesPlugin, { customRuleNames } from '../custom-rules-plugin.mjs';
 
 const ruleCount = Number(process.env.BENCH_CUSTOM_RULE_COUNT ?? '1');
 
@@ -9,15 +9,15 @@ if (![0, 1, 3, 10].includes(ruleCount)) {
 }
 
 const rules = Object.fromEntries(
-    Array.from({ length: ruleCount }, (_, index) => [
-        `bench/program-${index + 1}`,
+    customRuleNames.slice(0, ruleCount).map((ruleName) => [
+        `bench/${ruleName}`,
         'error',
     ]),
 );
 
 export default [
     {
-        files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
+        files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs', '**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
 
         plugins: {
             bench: customRulesPlugin,

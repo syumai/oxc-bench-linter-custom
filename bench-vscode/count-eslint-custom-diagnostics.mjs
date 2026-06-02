@@ -11,7 +11,7 @@ const eslint = new ESLint({
 const results = await eslint.lintFiles(['tmp/vscode/src']);
 const diagnostics = results.reduce(
     (count, result) =>
-        count + result.messages.filter((message) => message.ruleId?.startsWith('bench/program-')).length,
+        count + result.messages.filter((message) => message.ruleId?.startsWith('bench/')).length,
     0,
 );
 

@@ -79,7 +79,7 @@ function countOxlintCustomDiagnostics(output) {
         throw new Error('Unexpected oxlint JSON format');
     }
 
-    return diagnostics.filter((diagnostic) => diagnostic.code?.startsWith('bench(program-')).length;
+    return diagnostics.filter((diagnostic) => diagnostic.code?.startsWith('bench(')).length;
 }
 
 const baselineEslintDiagnostics = await countEslintDiagnostics(
