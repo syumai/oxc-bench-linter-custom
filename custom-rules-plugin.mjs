@@ -2,7 +2,7 @@ import { eslintCompatPlugin } from '@oxlint/plugins';
 
 export const customRuleNames = [
     'no-console-call',
-    'no-promise-then-chain',
+    'no-object-assign',
     'no-new-promise',
     'no-explicit-any',
     'no-non-null-assertion',
@@ -14,7 +14,7 @@ export const customRuleNames = [
 ];
 
 const consoleMethods = new Set(['log', 'warn', 'error', 'info', 'debug']);
-const promiseChainMethods = new Set(['then', 'catch', 'finally']);
+const objectAssignMethods = new Set(['assign']);
 const browserStorageNames = new Set(['localStorage', 'sessionStorage']);
 const querySelectorMethods = new Set(['querySelector', 'querySelectorAll']);
 const timerNames = new Set(['setTimeout', 'setInterval']);
@@ -87,12 +87,12 @@ const rules = {
         },
     })),
 
-    'no-promise-then-chain': createRule('disallow Promise then/catch/finally chains', (context) => ({
+    'no-object-assign': createRule('disallow Object.assign calls', (context) => ({
         CallExpression(node) {
-            if (node.callee?.type === 'MemberExpression' && promiseChainMethods.has(getStaticMemberName(node.callee))) {
+            if (isStaticMemberCall(node, 'Object', objectAssignMethods)) {
                 context.report({
                     node,
-                    message: 'Unexpected Promise chain method.',
+                    message: 'Unexpected Object.assign call.',
                 });
             }
         },

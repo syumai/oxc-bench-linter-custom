@@ -86,8 +86,8 @@ The custom rule diagnostics are verified before benchmarking:
 
 -   0 custom rules: 0 diagnostics in both ESLint and Oxlint
 -   1 custom rule: 757 diagnostics in both ESLint and Oxlint
--   3 custom rules: 4,600 diagnostics in both ESLint and Oxlint
--   10 custom rules: 15,944 diagnostics in both ESLint and Oxlint
+-   3 custom rules: 1,885 diagnostics in both ESLint and Oxlint
+-   10 custom rules: 13,229 diagnostics in both ESLint and Oxlint
 
 Note: with the current VS Code snapshot used for this run, the baseline
 standard-rule totals differ before adding custom rules: ESLint reports 2,876
@@ -98,90 +98,89 @@ therefore verifies and controls the added custom-rule diagnostics.
 
 | Custom rules | Custom diagnostics | Oxlint JS Plugin | ESLint Custom Rule | Speedup | Oxlint delta from 0 rules | ESLint delta from 0 rules |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 0 | 0 | 0.361 s | 40.792 s | 112.95x | - | - |
-| 1 | 757 | 3.606 s | 41.580 s | 11.53x | +3.245 s | +0.788 s |
-| 3 | 4,600 | 4.196 s | 47.953 s | 11.43x | +3.835 s | +7.161 s |
-| 10 | 15,944 | 4.907 s | 48.636 s | 9.91x | +4.546 s | +7.844 s |
+| 0 | 0 | 0.402 s | 47.359 s | 117.77x | - | - |
+| 1 | 757 | 3.913 s | 47.966 s | 12.26x | +3.511 s | +0.607 s |
+| 3 | 1,885 | 3.967 s | 48.185 s | 12.15x | +3.565 s | +0.826 s |
+| 10 | 13,229 | 4.745 s | 44.387 s | 9.35x | +4.343 s | -2.972 s |
 
 #### No ESLint custom rule vs no Oxlint JS Plugin rule
 
 ```
 Benchmark 1: oxc-js-plugin-0
-  Time (mean ± σ):     361.2 ms ±   2.0 ms    [User: 1508.3 ms, System: 858.1 ms]
-  Range (min … max):   358.2 ms … 364.6 ms    10 runs
+  Time (mean ± σ):     402.2 ms ±   4.8 ms    [User: 1541.9 ms, System: 809.8 ms]
+  Range (min … max):   396.8 ms … 411.8 ms    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-0
-  Time (mean ± σ):     40.792 s ±  0.146 s    [User: 60.016 s, System: 1.948 s]
-  Range (min … max):   40.544 s … 41.004 s    10 runs
+  Time (mean ± σ):     47.359 s ±  0.195 s    [User: 68.239 s, System: 2.865 s]
+  Range (min … max):   47.081 s … 47.665 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-0 ran
-  112.95 ± 0.74 times faster than eslint-custom-rules-0
+  117.77 ± 1.48 times faster than eslint-custom-rules-0
 ```
 
 #### 1 ESLint custom rule vs 1 Oxlint JS Plugin rule
 
 ```
 Benchmark 1: oxc-js-plugin-1
-  Time (mean ± σ):      3.606 s ±  0.017 s    [User: 5.649 s, System: 0.853 s]
-  Range (min … max):    3.584 s …  3.630 s    10 runs
+  Time (mean ± σ):      3.913 s ±  0.018 s    [User: 6.072 s, System: 0.986 s]
+  Range (min … max):    3.884 s …  3.940 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-1
-  Time (mean ± σ):     41.580 s ±  1.631 s    [User: 61.169 s, System: 2.182 s]
-  Range (min … max):   40.725 s … 46.161 s    10 runs
+  Time (mean ± σ):     47.966 s ±  0.734 s    [User: 69.994 s, System: 3.391 s]
+  Range (min … max):   47.363 s … 49.541 s    10 runs
 
   Warning: Ignoring non-zero exit code.
-  Warning: Statistical outliers were detected. Consider re-running this benchmark on a quiet system without any interferences from other programs. It might help to use the '--warmup' or '--prepare' options.
 
 Summary
   oxc-js-plugin-1 ran
-   11.53 ± 0.46 times faster than eslint-custom-rules-1
+   12.26 ± 0.20 times faster than eslint-custom-rules-1
 ```
 
 #### 3 ESLint custom rules vs 3 Oxlint JS Plugin rules
 
 ```
 Benchmark 1: oxc-js-plugin-3
-  Time (mean ± σ):      4.196 s ±  0.150 s    [User: 6.336 s, System: 0.959 s]
-  Range (min … max):    4.087 s …  4.586 s    10 runs
+  Time (mean ± σ):      3.967 s ±  0.019 s    [User: 6.160 s, System: 0.974 s]
+  Range (min … max):    3.936 s …  3.990 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-3
-  Time (mean ± σ):     47.953 s ±  1.072 s    [User: 69.830 s, System: 3.628 s]
-  Range (min … max):   46.313 s … 49.784 s    10 runs
+  Time (mean ± σ):     48.185 s ±  0.534 s    [User: 70.666 s, System: 3.435 s]
+  Range (min … max):   47.573 s … 49.293 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-3 ran
-   11.43 ± 0.48 times faster than eslint-custom-rules-3
+   12.15 ± 0.15 times faster than eslint-custom-rules-3
 ```
 
 #### 10 ESLint custom rules vs 10 Oxlint JS Plugin rules
 
 ```
 Benchmark 1: oxc-js-plugin-10
-  Time (mean ± σ):      4.907 s ±  0.025 s    [User: 7.086 s, System: 0.992 s]
-  Range (min … max):    4.865 s …  4.958 s    10 runs
+  Time (mean ± σ):      4.745 s ±  0.033 s    [User: 6.983 s, System: 1.000 s]
+  Range (min … max):    4.696 s …  4.804 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-10
-  Time (mean ± σ):     48.636 s ±  0.746 s    [User: 71.408 s, System: 3.318 s]
-  Range (min … max):   48.116 s … 50.374 s    10 runs
+  Time (mean ± σ):     44.387 s ±  2.745 s    [User: 65.516 s, System: 2.988 s]
+  Range (min … max):   41.593 s … 49.023 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-10 ran
-    9.91 ± 0.16 times faster than eslint-custom-rules-10
+    9.35 ± 0.58 times faster than eslint-custom-rules-10
 ```
 
 ## Vue Core Benchmark Results
