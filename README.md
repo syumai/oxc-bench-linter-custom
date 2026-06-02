@@ -1,6 +1,6 @@
 # Benchmark for Oxc, Biome and ESLint
 
-This repository contains four separate benchmarks:
+This repository contains three separate benchmarks:
 
 -   **bench-vscode**: Benchmarks on VS Code codebase with standard linting rules
 -   **bench-vue**: Benchmarks on Vue Core codebase with type-aware linting rules
@@ -8,9 +8,11 @@ This repository contains four separate benchmarks:
 
 ## Summary
 
-Oxlint is 50x - 100x faster than ESLint depending on the number of CPU cores.
+On a MacBook Pro M1 Pro (32GB), Oxlint is 21x faster than ESLint on the VS Code
+standard rules benchmark, 85x faster on the Vue Core type-aware benchmark, and
+70x faster on the Sentry type-aware benchmark.
 
-Oxlint is ~2x faster than Biome.
+Oxlint is 4.13x faster than Biome on the VS Code single-rule benchmark.
 
 ## Setup
 
@@ -22,143 +24,53 @@ Each benchmark is in its own directory:
 
 ## VS Code Benchmark Results
 
+### MacBook Pro M1 Pro (32GB)
+
 ### Oxlint vs Biome
 
-### MacBook Pro M2 Max
-
 ```
 Benchmark 1: oxc
-  Time (mean ± σ):     138.6 ms ±   2.1 ms    [User: 673.9 ms, System: 163.2 ms]
-  Range (min … max):   133.9 ms … 143.2 ms    20 runs
+  Time (mean ± σ):     320.6 ms ±   6.5 ms    [User: 911.8 ms, System: 840.3 ms]
+  Range (min … max):   313.7 ms … 331.7 ms    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: biome
-  Time (mean ± σ):     377.2 ms ±   6.3 ms    [User: 2827.2 ms, System: 340.6 ms]
-  Range (min … max):   372.0 ms … 393.9 ms    10 runs
+  Time (mean ± σ):      1.324 s ±  0.037 s    [User: 8.077 s, System: 1.994 s]
+  Range (min … max):    1.294 s …  1.406 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc ran
-    2.72 ± 0.06 times faster than biome
+    4.13 ± 0.14 times faster than biome
 ```
 
-### Macbook Pro M4 Max, 64 GB
-
-```
-Benchmark 1: oxc
-  Time (mean ± σ):      98.2 ms ±  20.5 ms    [User: 514.3 ms, System: 186.3 ms]
-  Range (min … max):    91.4 ms … 208.2 ms    31 runs
-
-  Warning: Ignoring non-zero exit code.
-  Warning: Statistical outliers were detected. Consider re-running this benchmark on a quiet system without any interferences from other programs. It might help to use the '--warmup' or '--prepare' options.
-
-Benchmark 2: biome
-  Time (mean ± σ):     244.5 ms ±  18.0 ms    [User: 2047.0 ms, System: 392.9 ms]
-  Range (min … max):   232.4 ms … 299.9 ms    12 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Summary
-  oxc ran
-    2.49 ± 0.55 times faster than biome
-```
-
-### Macbook Air M3, 24 GB, 8 core (4 performance cores, 4 efficiency cores)
+### Oxlint vs ESLint
 
 ```
 Benchmark 1: oxc
-  Time (mean ± σ):     150.7 ms ±   2.9 ms    [User: 640.7 ms, System: 152.2 ms]
-  Range (min … max):   146.8 ms … 158.8 ms    20 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Benchmark 2: biome
-  Time (mean ± σ):     498.8 ms ±   4.1 ms    [User: 2729.6 ms, System: 315.9 ms]
-  Range (min … max):   492.7 ms … 507.8 ms    10 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Summary
-  oxc ran
-    3.31 ± 0.07 times faster than biome
-```
-
-### Oxlint vs ESLint v9
-
-### MacBook Pro M2 Max 12 Cores (8 performance and 4 efficiency)
-
-```
-Benchmark 1: oxc
-  Time (mean ± σ):     499.6 ms ±   9.0 ms    [User: 2485.7 ms, System: 165.2 ms]
-  Range (min … max):   489.6 ms … 516.1 ms    10 runs
+  Time (mean ± σ):      2.562 s ±  0.082 s    [User: 9.601 s, System: 1.919 s]
+  Range (min … max):    2.482 s …  2.778 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: oxc-single-thread
-  Time (mean ± σ):      1.824 s ±  0.035 s    [User: 2.079 s, System: 0.134 s]
-  Range (min … max):    1.789 s …  1.903 s    10 runs
+  Time (mean ± σ):      3.956 s ±  0.063 s    [User: 9.289 s, System: 1.399 s]
+  Range (min … max):    3.861 s …  4.056 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 3: eslint
-  Time (mean ± σ):     31.025 s ±  0.744 s    [User: 48.279 s, System: 2.224 s]
-  Range (min … max):   30.556 s … 33.030 s    10 runs
+  Time (mean ± σ):     54.028 s ±  0.737 s    [User: 75.433 s, System: 3.602 s]
+  Range (min … max):   53.344 s … 55.421 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc ran
-    3.65 ± 0.10 times faster than oxc-single-thread
-   62.10 ± 1.86 times faster than eslint
-```
-
-### Macbook Pro M4 Max, 64 GB
-
-```
-Benchmark 1: oxc
-  Time (mean ± σ):     177.2 ms ±   9.7 ms    [User: 1428.0 ms, System: 125.4 ms]
-  Range (min … max):   163.6 ms … 193.0 ms    17 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Benchmark 2: eslint
-  Time (mean ± σ):     20.957 s ±  0.377 s    [User: 33.216 s, System: 1.722 s]
-  Range (min … max):   20.132 s … 21.376 s    10 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Summary
-  oxc ran
-  118.25 ± 6.78 times faster than eslint
-```
-
-### Macbook Air M3, 24 GB, 8 core (4 performance cores, 4 efficiency cores)
-
-```
-Benchmark 1: oxc
-  Time (mean ± σ):     477.3 ms ±  12.8 ms    [User: 2370.8 ms, System: 152.6 ms]
-  Range (min … max):   451.6 ms … 499.2 ms    10 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Benchmark 2: oxc-single-thread
-  Time (mean ± σ):      1.616 s ±  0.013 s    [User: 1.848 s, System: 0.111 s]
-  Range (min … max):    1.606 s …  1.642 s    10 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Benchmark 3: eslint
-  Time (mean ± σ):     28.682 s ±  0.303 s    [User: 45.572 s, System: 1.748 s]
-  Range (min … max):   28.318 s … 29.345 s    10 runs
-
-  Warning: Ignoring non-zero exit code.
-
-Summary
-  oxc ran
-    3.38 ± 0.09 times faster than oxc-single-thread
-   60.09 ± 1.73 times faster than eslint
+    1.54 ± 0.06 times faster than oxc-single-thread
+   21.09 ± 0.73 times faster than eslint
 ```
 
 ### Oxlint JS Plugin vs ESLint Custom Rules
@@ -179,97 +91,93 @@ standard-rule totals differ before adding custom rules: ESLint reports 2,876
 diagnostics, and Oxlint reports 1,702 diagnostics. The comparison below
 therefore verifies and controls the added custom-rule diagnostics.
 
-### Apple Silicon arm64
-
 #### Summary
 
 | Custom rules | Custom diagnostics | Oxlint JS Plugin | ESLint Custom Rule | Speedup | Oxlint delta from 0 rules | ESLint delta from 0 rules |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 0 | 0 | 0.432 s | 44.783 s | 103.63x | - | - |
-| 1 | 6,948 | 4.220 s | 47.711 s | 11.31x | +3.788 s | +2.928 s |
-| 3 | 20,844 | 4.650 s | 47.814 s | 10.28x | +4.218 s | +3.031 s |
-| 10 | 69,480 | 6.117 s | 44.093 s | 7.21x | +5.685 s | -0.690 s |
+| 0 | 0 | 0.368 s | 40.931 s | 111.14x | - | - |
+| 1 | 6,948 | 3.803 s | 41.000 s | 10.78x | +3.435 s | +0.069 s |
+| 3 | 20,844 | 4.187 s | 41.003 s | 9.79x | +3.819 s | +0.072 s |
+| 10 | 69,480 | 5.560 s | 41.158 s | 7.40x | +5.192 s | +0.227 s |
 
 #### No ESLint custom rule vs no Oxlint JS Plugin rule
 
 ```
 Benchmark 1: oxc-js-plugin-0
-  Time (mean ± σ):     432.2 ms ±  49.7 ms    [User: 1553.5 ms, System: 784.0 ms]
-  Range (min … max):   386.1 ms … 544.3 ms    10 runs
+  Time (mean ± σ):     368.3 ms ±   2.7 ms    [User: 1499.0 ms, System: 817.7 ms]
+  Range (min … max):   363.2 ms … 371.5 ms    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-0
-  Time (mean ± σ):     44.783 s ±  0.209 s    [User: 64.544 s, System: 2.572 s]
-  Range (min … max):   44.445 s … 45.070 s    10 runs
+  Time (mean ± σ):     40.931 s ±  0.232 s    [User: 60.314 s, System: 1.978 s]
+  Range (min … max):   40.607 s … 41.393 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-0 ran
-  103.63 ± 11.92 times faster than eslint-custom-rules-0
+  111.14 ± 1.03 times faster than eslint-custom-rules-0
 ```
 
 #### 1 ESLint custom rule vs 1 Oxlint JS Plugin rule
 
 ```
 Benchmark 1: oxc-js-plugin-1
-  Time (mean ± σ):      4.220 s ±  0.033 s    [User: 6.481 s, System: 1.034 s]
-  Range (min … max):    4.184 s …  4.304 s    10 runs
+  Time (mean ± σ):      3.803 s ±  0.013 s    [User: 5.856 s, System: 0.886 s]
+  Range (min … max):    3.790 s …  3.830 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-1
-  Time (mean ± σ):     47.711 s ±  0.234 s    [User: 68.919 s, System: 2.906 s]
-  Range (min … max):   47.225 s … 48.012 s    10 runs
+  Time (mean ± σ):     41.000 s ±  0.323 s    [User: 59.515 s, System: 2.049 s]
+  Range (min … max):   40.566 s … 41.593 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-1 ran
-   11.31 ± 0.10 times faster than eslint-custom-rules-1
+   10.78 ± 0.09 times faster than eslint-custom-rules-1
 ```
 
 #### 3 ESLint custom rules vs 3 Oxlint JS Plugin rules
 
 ```
 Benchmark 1: oxc-js-plugin-3
-  Time (mean ± σ):      4.650 s ±  0.043 s    [User: 6.944 s, System: 1.005 s]
-  Range (min … max):    4.590 s …  4.749 s    10 runs
+  Time (mean ± σ):      4.187 s ±  0.008 s    [User: 6.236 s, System: 0.890 s]
+  Range (min … max):    4.173 s …  4.198 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-3
-  Time (mean ± σ):     47.814 s ±  0.157 s    [User: 68.821 s, System: 2.915 s]
-  Range (min … max):   47.533 s … 48.070 s    10 runs
+  Time (mean ± σ):     41.003 s ±  0.223 s    [User: 59.638 s, System: 2.030 s]
+  Range (min … max):   40.707 s … 41.333 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-3 ran
-   10.28 ± 0.10 times faster than eslint-custom-rules-3
+    9.79 ± 0.06 times faster than eslint-custom-rules-3
 ```
 
 #### 10 ESLint custom rules vs 10 Oxlint JS Plugin rules
 
 ```
 Benchmark 1: oxc-js-plugin-10
-  Time (mean ± σ):      6.117 s ±  0.040 s    [User: 8.386 s, System: 1.056 s]
-  Range (min … max):    6.051 s …  6.198 s    10 runs
+  Time (mean ± σ):      5.560 s ±  0.031 s    [User: 7.670 s, System: 0.902 s]
+  Range (min … max):    5.529 s …  5.627 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint-custom-rules-10
-  Time (mean ± σ):     44.093 s ±  2.963 s    [User: 64.556 s, System: 2.338 s]
-  Range (min … max):   41.889 s … 49.219 s    10 runs
-
-  Warning: Statistical outliers were detected. Consider re-running this benchmark on a quiet system without any interferences from other programs. It might help to use the '--warmup' or '--prepare' options.
+  Time (mean ± σ):     41.158 s ±  0.209 s    [User: 59.949 s, System: 2.007 s]
+  Range (min … max):   40.876 s … 41.522 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc-js-plugin-10 ran
-    7.21 ± 0.49 times faster than eslint-custom-rules-10
+    7.40 ± 0.06 times faster than eslint-custom-rules-10
 ```
 
 ## Vue Core Benchmark Results
@@ -278,32 +186,25 @@ Summary
 
 Oxlint with type-aware rules vs TypeScript ESLint on Vue Core codebase.
 
-### MacBook Pro M2 Max 12 Cores (8 performance and 4 efficiency)
+### MacBook Pro M1 Pro (32GB)
 
 ```
-./bench.sh
-============================================
-Vue Core Benchmark - Type-Aware Rules
-============================================
-
-Oxlint vs TypeScript ESLint with type-aware rules
--------------------------------------------
 Benchmark 1: oxc
-  Time (mean ± σ):      2.531 s ±  0.055 s    [User: 4.919 s, System: 0.588 s]
-  Range (min … max):    2.462 s …  2.648 s    10 runs
+  Time (mean ± σ):     236.5 ms ±   4.3 ms    [User: 554.2 ms, System: 162.1 ms]
+  Range (min … max):   229.6 ms … 240.8 ms    12 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint
- ⠇ Performing warmup runs         ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ ETA 00:00:00 ^R
-  Time (mean ± σ):     20.800 s ±  0.130 s    [User: 26.686 s, System: 3.096 s]
-  Range (min … max):   20.605 s … 21.055 s    10 runs
+  Time (mean ± σ):     20.147 s ±  0.948 s    [User: 27.855 s, System: 1.752 s]
+  Range (min … max):   17.697 s … 21.476 s    10 runs
 
   Warning: Ignoring non-zero exit code.
+  Warning: Statistical outliers were detected. Consider re-running this benchmark on a quiet system without any interferences from other programs. It might help to use the '--warmup' or '--prepare' options.
 
 Summary
   oxc ran
-    8.22 ± 0.19 times faster than eslint
+   85.17 ± 4.30 times faster than eslint
 ```
 
 ## Sentry Benchmark Results
@@ -312,31 +213,24 @@ Summary
 
 Oxlint with type-aware rules vs TypeScript ESLint on Sentry codebase.
 
-### MacBook Pro M2 Max 12 Cores (8 performance and 4 efficiency)
+### MacBook Pro M1 Pro (32GB)
 
 ```
-./bench.sh
-============================================
-Sentry Benchmark - Type-Aware Linting
-============================================
-
-Oxlint vs TypeScript ESLint with type-aware rules
--------------------------------------------
 Benchmark 1: oxc
-  Time (mean ± σ):      4.448 s ±  0.076 s    [User: 11.435 s, System: 2.521 s]
-  Range (min … max):    4.373 s …  4.555 s    10 runs
+  Time (mean ± σ):      1.320 s ±  0.042 s    [User: 7.091 s, System: 1.878 s]
+  Range (min … max):    1.275 s …  1.427 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Benchmark 2: eslint
-  Time (mean ± σ):     55.070 s ±  0.766 s    [User: 84.407 s, System: 9.776 s]
-  Range (min … max):   53.952 s … 56.260 s    10 runs
+  Time (mean ± σ):     92.628 s ±  2.109 s    [User: 141.874 s, System: 14.837 s]
+  Range (min … max):   88.734 s … 95.121 s    10 runs
 
   Warning: Ignoring non-zero exit code.
 
 Summary
   oxc ran
-   12.38 ± 0.27 times faster than eslint
+   70.15 ± 2.76 times faster than eslint
 ```
 
 ## Run
